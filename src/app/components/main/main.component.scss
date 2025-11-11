@@ -1,0 +1,73 @@
+.wrapper {
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  background-color: #b8e0d2;
+}
+
+.phrases {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding: 30px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #2d3e40 #b8e0d2;
+}
+
+.phrases::-webkit-scrollbar {
+  height: 3px;
+}
+
+.phrases::-webkit-scrollbar-track {
+  background: #b8e0d2;
+  border-radius: 10px;
+}
+
+.phrases::-webkit-scrollbar-thumb {
+  background-color: #2d3e40;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.phrases::-webkit-scrollbar-thumb:hover {
+  background-color: #1f2c2e;
+}
+
+.phraseCard {
+  flex: 0 0 300px;
+  user-select: none;
+  height: 200px;
+  background-color: #2d3e40;
+  color: #b8e0d2;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+.phraseCard:nth-child(odd) {
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
+}
+
+.phraseCard:nth-child(even) {
+  box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5) inset;
+  -webkit-box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5) inset;
+  -moz-box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.5) inset;
+}
+
+.phraseCard h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
