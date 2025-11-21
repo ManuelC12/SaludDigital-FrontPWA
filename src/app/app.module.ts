@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
+//import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -17,12 +17,20 @@ import { MedComponent } from './pages/med/med.component';
 import { FeelingsComponent } from './pages/feelings/feelings.component';
 import { ObjectiveComponent } from './pages/objective/objective.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+
+
+const routes: Routes = [
+  { path: '', component: LoginComponent },   // 👈 Ruta inicial
+  { path: '**', redirectTo: '' }             // 👈 Si ponen una ruta que no existe, vuelve al login
+];
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
+   // HomeComponent,
     RegisterComponent,
     NavbarComponent,
     SidebarComponent,
@@ -38,7 +46,10 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+     HttpClientModule,
+      FormsModule,
+  ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

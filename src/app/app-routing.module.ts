@@ -12,6 +12,7 @@ import { MedComponent } from './pages/med/med.component';
 import { MeditationComponent } from './pages/meditation/meditation.component';
 
 const routes: Routes = [
+    { path: '', component: LoginComponent },
   {path: 'main', component: MainComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},

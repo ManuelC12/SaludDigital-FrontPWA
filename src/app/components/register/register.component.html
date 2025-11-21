@@ -1,1 +1,52 @@
-<p>register works!</p>
+<div class="register-container">
+    <div class="glass-card">
+        <div class="logo">
+            <h1>Crear Cuenta</h1>
+            <p class="subtitle">Únete a nuestra comunidad</p>
+        </div>
+
+        <form class="register-form" (ngSubmit)="registrar()">
+            <div class="input-group">
+                <label>Nombre completo</label>
+                <input type="text" class="input-field" placeholder="Ingresa tu nombre completo"
+                       [(ngModel)]="form.nombre" name="nombre" required />
+            </div>
+
+            <div class="input-group">
+                <label>Correo electrónico</label>
+                <input type="email" class="input-field" placeholder="tu@email.com"
+                       [(ngModel)]="form.email" name="email" required />
+            </div>
+
+            <div class="input-group">
+                <label>Número de celular</label>
+                <input type="tel" class="input-field" placeholder="1234567890"
+                       [(ngModel)]="form.celular" name="celular" required />
+            </div>
+
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" class="input-field" placeholder="••••••••"
+                       [(ngModel)]="form.password" name="password" required />
+            </div>
+
+            <div class="input-group">
+                <label>Edad</label>
+                <input type="number" class="input-field" placeholder="20"
+                       [(ngModel)]="form.edad" name="edad" required />
+            </div>
+
+            <div class="input-group">
+                <label>Género</label>
+                <input type="text" class="input-field" placeholder="Masculino / Femenino"
+                       [(ngModel)]="form.genre" name="genre" required />
+            </div>
+
+            <button type="submit" class="register-btn">Crear Cuenta</button>
+        </form>
+
+        <div class="links">
+            <p>¿Ya tienes una cuenta? <a routerLink="/login">Iniciar Sesión</a></p>
+        </div>
+    </div>
+</div>
