@@ -1,0 +1,146 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #a8e6cf 0%, #2d936c 100%);
+  font-family: 'Poppins', sans-serif;
+  padding-bottom: 80px; /* espacio para la navegación */
+}
+
+.header {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20px;
+  text-align: center;
+  border-radius: 20px;
+  margin: 20px;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.meditaciones-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.meditacion-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.meditacion-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(31, 38, 135, 0.2);
+}
+
+.play-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #2d936c;
+  border: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 16px;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+
+.play-btn:hover {
+  background-color: #23784f;
+}
+
+.play-icon {
+  font-size: 20px;
+  margin-left: 3px;
+}
+
+.meditacion-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.meditacion-titulo {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a3c2f;
+  margin: 0 0 4px 0;
+}
+
+.meditacion-duracion {
+  font-size: 14px;
+  color: #1a3c2f;
+  margin: 0;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 -8px 32px rgba(31, 38, 135, 0.1);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #1a3c2f;
+  font-size: 12px;
+  transition: color 0.2s ease;
+}
+
+.nav-item.active {
+  color: #2d936c;
+}
+
+.nav-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.nav-label {
+  font-weight: 500;
+}

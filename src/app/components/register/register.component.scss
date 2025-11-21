@@ -5,7 +5,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body {
+:host {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,7 +101,6 @@ body {
 .password-match {
     font-size: 12px;
     margin-top: 5px;
-    display: block;
     height: 16px;
 }
 
@@ -177,7 +176,6 @@ body {
     text-decoration: underline;
 }
 
-/* Estados de validación */
 .input-field.valid {
     border-color: #2d936c;
 }
@@ -188,12 +186,10 @@ body {
 
 .password-match.valid {
     color: #2d936c;
-    content: "✓ Las contraseñas coinciden";
 }
 
 .password-match.invalid {
     color: #e74c3c;
-    content: "✗ Las contraseñas no coinciden";
 }
 
 @media (max-width: 480px) {

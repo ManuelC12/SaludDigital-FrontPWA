@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h1>Hola! ¿Cómo te sientes hoy?</h1>
+    </div>
+    
+    <div class="emociones-container">
+      <div 
+        *ngFor="let emocion of emociones" 
+        class="emocion-btn"
+        [class.selected]="emocionSeleccionada === emocion.nombre"
+        (click)="seleccionarEmocion(emocion.nombre)">
+        <div class="emocion-icono">{{ emocion.icono }}</div>
+        <div class="emocion-nombre">{{ emocion.nombre }}</div>
+      </div>
+    </div>
+    
+    <div class="acciones">
+      <button 
+        class="btn-continuar" 
+        [disabled]="!emocionSeleccionada"
+        (click)="continuar()">
+        Continuar
+      </button>
+      <button class="btn-saltar" (click)="saltar()">Saltar</button>
+    </div>
+  </div>
+</div>

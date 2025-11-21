@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h1>¿Cuál es tu objetivo al utilizar esta aplicación?</h1>
+    </div>
+    
+    <div class="objetivos-lista">
+      <div 
+        *ngFor="let objetivo of objetivos" 
+        class="objetivo-item"
+        [class.selected]="objetivosSeleccionados.includes(objetivo.id)"
+        (click)="toggleObjetivo(objetivo.id)">
+        
+        <div class="selector-indicador" [class.selected]="objetivosSeleccionados.includes(objetivo.id)"></div>
+        <span class="objetivo-texto">{{ objetivo.texto }}</span>
+      </div>
+    </div>
+    
+    <div class="acciones">
+      <button 
+        class="btn-continuar" 
+        [disabled]="!haySeleccion"
+        (click)="continuar()">
+        Continuar
+      </button>
+      <button class="btn-saltar" (click)="saltar()">Saltar</button>
+    </div>
+  </div>
+</div>

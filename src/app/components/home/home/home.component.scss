@@ -1,0 +1,118 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #a8e6cf 0%, #2d936c 100%);
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.emociones-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.emocion-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.emocion-btn:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.emocion-btn.selected {
+  border-color: #2d936c;
+  background-color: rgba(45, 147, 108, 0.2);
+}
+
+.emocion-icono {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.emocion-nombre {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a3c2f;
+}
+
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.btn-continuar, .btn-saltar {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-continuar {
+  background-color: #2d936c;
+  color: white;
+  border: none;
+}
+
+.btn-continuar:disabled {
+  background-color: #9bcaa5;
+  cursor: not-allowed;
+}
+
+.btn-saltar {
+  background-color: transparent;
+  color: #2d936c;
+  border: 2px solid #2d936c;
+}
+
+.btn-continuar:hover:not(:disabled) {
+  background-color: #23784f;
+}
+
+.btn-saltar:hover {
+  background-color: rgba(45, 147, 108, 0.2);
+}

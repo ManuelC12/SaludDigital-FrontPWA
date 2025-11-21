@@ -1,0 +1,40 @@
+<div class="main-container">
+  <header class="header">
+    <h1>Comienza tu meditación</h1>
+  </header>
+
+  <main class="content">
+    <h2 class="section-title">Meditaciones recomendadas para ti</h2>
+    
+    <div class="meditaciones-lista">
+      <div *ngFor="let meditacion of meditacionesRecomendadas" class="meditacion-item">
+        <button class="play-btn" (click)="reproducirMeditacion(meditacion.id)">
+          <span class="play-icon">▶</span>
+        </button>
+        <div class="meditacion-info">
+          <p class="meditacion-titulo">{{ meditacion.titulo }}</p>
+          <p class="meditacion-duracion">{{ meditacion.duracion }} mins</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item active">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Home</span>
+    </a>
+    <a href="#" class="nav-item">
+      <span class="nav-icon">🔍</span>
+      <span class="nav-label">Buscar</span>
+    </a>
+    <a href="#" class="nav-item">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label">Calendario</span>
+    </a>
+    <a href="#" class="nav-item">
+      <span class="nav-icon">👤</span>
+      <span class="nav-label">Perfil</span>
+    </a>
+  </nav>
+</div>

@@ -10,9 +10,15 @@ import { FeelingsComponent } from './pages/feelings/feelings.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MedComponent } from './pages/med/med.component';
 import { MeditationComponent } from './pages/meditation/meditation.component';
+import { HomeComponent } from './components/home/home/home.component';
+import { ObjetivosComponent } from './components/objetivos/objetivos.component';
+import { MeditacionesComponent } from './components/meditaciones/meditaciones.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
+    {path: 'objetivos', component: ObjetivosComponent},
+    {path: 'meditaciones', component: MeditacionesComponent},
+    {path: 'home', component: HomeComponent},
   {path: 'main', component: MainComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},

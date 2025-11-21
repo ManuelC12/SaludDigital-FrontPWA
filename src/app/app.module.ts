@@ -19,18 +19,24 @@ import { ObjectiveComponent } from './pages/objective/objective.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { HomeComponent } from './components/home/home/home.component';
+import { ObjetivosComponent } from './components/objetivos/objetivos.component';
+import { MeditacionesComponent } from './components/meditaciones/meditaciones.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },   // 👈 Ruta inicial
-  { path: '**', redirectTo: '' }             // 👈 Si ponen una ruta que no existe, vuelve al login
+  { path: '', component: LoginComponent }, 
+   { path: 'home', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
+  {path: 'objetivos',component:ObjetivosComponent}, 
+  {path:'meditaciones',component:MeditacionesComponent},
+  { path: '**', redirectTo: '' }             
 ];
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-   // HomeComponent,
+    HomeComponent,
     RegisterComponent,
     NavbarComponent,
     SidebarComponent,
@@ -42,7 +48,10 @@ const routes: Routes = [
     MedComponent,
     FeelingsComponent,
     ObjectiveComponent,
-    HomePageComponent
+    HomePageComponent,
+    HomeComponent,
+    ObjetivosComponent,
+    MeditacionesComponent
   ],
   imports: [
     BrowserModule,

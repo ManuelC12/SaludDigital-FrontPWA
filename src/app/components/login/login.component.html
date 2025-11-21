@@ -1,53 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Minimalista</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="login.component.scss">
-</head>
-<body>
-    <div class="login-container">
-        <div class="glass-card">
-            <div class="logo">
-                <h1>Bienvenido</h1>
-            </div>
-            
-            <div class="input-group">
-                <label for="email">Correo electrónico</label>
-                <input type="email" id="email" class="input-field" placeholder="tu@email.com">
-            </div>
-            
-            <div class="input-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" class="input-field" placeholder="••••••••">
-            </div>
-            
-            <button class="login-btn">Iniciar Sesión</button>
-            
-            <div class="links">
-                <a href="#">¿Olvidaste tu contraseña?</a>
-                <a routerLink="/register">Crear cuenta</a>
-            </div>
-        </div>
+<div class="login-container">
+  <div class="glass-card">
+    <div class="logo">
+      <h1>Bienvenido</h1>
     </div>
 
-    <script>
-        // Agregar efecto de foco a los campos de entrada
-        document.querySelectorAll('.input-field').forEach(field => {
-            field.addEventListener('focus', function() {
-                this.style.boxShadow = '0 0 0 2px rgba(45, 147, 108, 0.3)';
-                this.style.borderColor = '#2d936c';
-                this.style.background = 'rgba(255, 255, 255, 0.9)';
-            });
-            
-            field.addEventListener('blur', function() {
-                this.style.boxShadow = 'none';
-                this.style.borderColor = '#1a3c2f';
-                this.style.background = 'rgba(255, 255, 255, 0.7)';
-            });
-        });
-    </script>
-</body>
-</html>
+    <!-- Email -->
+    <div class="input-group">
+      <label for="email">Correo electrónico</label>
+      <input
+        type="email"
+        id="email"
+        class="input-field"
+        [(ngModel)]="email"
+        placeholder="tu@email.com"
+      />
+    </div>
+
+    <!-- Password -->
+    <div class="input-group">
+      <label for="password">Contraseña</label>
+      <input
+        type="password"
+        id="password"
+        class="input-field"
+        [(ngModel)]="password"
+        placeholder="••••••••"
+      />
+    </div>
+
+    <!-- Mensaje de error -->
+    <div *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</div>
+
+    <!-- Botón login -->
+    <button class="login-btn" (click)="login()">Iniciar Sesión</button>
+
+    <div class="links">
+      <a href="#">¿Olvidaste tu contraseña?</a>
+      <a routerLink="/register">Crear cuenta</a>
+    </div>
+  </div>
+</div>
