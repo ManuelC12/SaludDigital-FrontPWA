@@ -22,6 +22,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home/home.component';
 import { ObjetivosComponent } from './components/objetivos/objetivos.component';
 import { MeditacionesComponent } from './components/meditaciones/meditaciones.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {path: 'objetivos',component:ObjetivosComponent}, 
   {path:'meditaciones',component:MeditacionesComponent},
+  {path:'perfil',component:PerfilComponent},
   { path: '**', redirectTo: '' }             
 ];
 @NgModule({
@@ -51,7 +53,8 @@ const routes: Routes = [
     HomePageComponent,
     HomeComponent,
     ObjetivosComponent,
-    MeditacionesComponent
+    MeditacionesComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

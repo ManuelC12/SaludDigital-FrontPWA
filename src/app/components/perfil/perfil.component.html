@@ -1,0 +1,55 @@
+<div class="profile-container">
+  <div class="glass-card">
+
+    <div class="header">
+      <button class="back-btn" (click)="irAlInicio()">←</button>
+      <h1>Mi Perfil</h1>
+    </div>
+
+    <div *ngIf="loading" style="text-align: center; color: white; margin: 20px 0;">
+      <p>Cargando datos...</p>
+    </div>
+
+    <div *ngIf="!loading">
+      
+      <div class="avatar-section">
+        <div class="avatar-circle">
+          <span class="avatar-iniciales">{{ iniciales }}</span>
+        </div>
+        <h2 class="nombre">{{ usuario.nombre }}</h2>
+        <p class="desde">Usuario Activo</p>
+      </div>
+
+      <div class="input-group">
+        <label>Nombre completo</label>
+        <input class="input-field readonly" [value]="usuario.nombre" readonly>
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input class="input-field readonly" [value]="usuario.email" readonly>
+      </div>
+
+      <div class="double">
+        <div class="input-group">
+          <label>Edad</label>
+          <input class="input-field readonly center" [value]="usuario.edad" readonly>
+        </div>
+
+        <div class="input-group">
+          <label>Género</label>
+          <input class="input-field readonly center" [value]="usuario.genre" readonly>
+        </div>
+      </div>
+
+      <button class="login-btn">
+        ⚙️ Configuración
+      </button>
+
+      <button class="logout-btn" (click)="cerrarSesion()">
+        🚪 Cerrar Sesión
+      </button>
+      
+    </div>
+  </div>
+</div>

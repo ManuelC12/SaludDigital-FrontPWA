@@ -136,9 +136,11 @@
   color: #2d936c;
 }
 
-.nav-icon {
-  font-size: 24px;
-  margin-bottom: 4px;
+.nav-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  display: block;
 }
 
 .nav-label {
