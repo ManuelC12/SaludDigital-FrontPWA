@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +23,10 @@ import { HomeComponent } from './components/home/home/home.component';
 import { ObjetivosComponent } from './components/objetivos/objetivos.component';
 import { MeditacionesComponent } from './components/meditaciones/meditaciones.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-
+import { AgendaComponent } from './components/agenda/agenda.component';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { RutinasComponent } from './components/rutinas/rutinas.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent }, 
@@ -31,7 +34,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {path: 'objetivos',component:ObjetivosComponent}, 
   {path:'meditaciones',component:MeditacionesComponent},
+  {path: 'rutinas',component:RutinasComponent},
   {path:'perfil',component:PerfilComponent},
+  {path:'agenda',component:AgendaComponent},
   { path: '**', redirectTo: '' }             
 ];
 @NgModule({
@@ -54,14 +59,24 @@ const routes: Routes = [
     HomeComponent,
     ObjetivosComponent,
     MeditacionesComponent,
-    PerfilComponent
+    PerfilComponent,
+    AgendaComponent,
+    RecoverPasswordComponent,
+    RutinasComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
      HttpClientModule,
       FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  ServiceWorkerModule.register('ngsw-worker.js', {
+    enabled: !isDevMode(),
+    // Register the ServiceWorker as soon as the application is stable
+    // or after 30 seconds (whichever comes first).
+    registrationStrategy: 'registerWhenStable:30000'
+  })
   ],
   providers: [],
   bootstrap: [AppComponent]

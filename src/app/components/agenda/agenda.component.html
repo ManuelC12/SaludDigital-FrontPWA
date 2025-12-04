@@ -1,0 +1,133 @@
+<div class="agenda-wrapper">
+  
+  <header class="header">
+    <h1>Mi Diario</h1>
+    <span class="subtitle">Registro emocional y físico</span>
+  </header>
+
+  <div class="content">
+    <form #agendaForm="ngForm" (ngSubmit)="agendaForm.form.valid && saveEntry(agendaForm)" novalidate>
+      
+      <div class="layout-grid">
+        
+        <div class="glass-card input-section">
+          <h3 class="section-title-card">📝 Detalles</h3>
+          
+          <div class="input-group">
+            <label for="dateEntry">Fecha</label>
+            <input type="date" id="dateEntry" name="dateEntry" [(ngModel)]="fechaHoy" required>
+          </div>
+
+          <div class="input-group">
+            <label for="subject">Título del día</label>
+            <input type="text" id="subject" name="subject" placeholder="Ej: Un día tranquilo..." ngModel required minlength="3">
+          </div>
+
+          <div class="input-group">
+            <label for="reflection">Reflexión / Desahogo</label>
+            <textarea id="reflection" name="reflection" rows="3" placeholder="¿Qué tienes en mente hoy?" ngModel></textarea>
+          </div>
+        </div>
+
+        <div class="glass-card mood-section">
+          <h3 class="section-title-card">✨ Bienestar</h3>
+          
+          <label class="sub-label">¿Cómo te sentiste?</label>
+          <div class="mood-options">
+            <input type="radio" id="mood-happy" name="mood" value="happy" ngModel required>
+            <label for="mood-happy" class="mood-item">
+              <span class="emoji">😃</span> <span class="label-text">Bien</span>
+            </label>
+
+            <input type="radio" id="mood-neutral" name="mood" value="neutral" ngModel required>
+            <label for="mood-neutral" class="mood-item">
+              <span class="emoji">😐</span> <span class="label-text">Normal</span>
+            </label>
+
+            <input type="radio" id="mood-sad" name="mood" value="sad" ngModel required>
+            <label for="mood-sad" class="mood-item">
+              <span class="emoji">😔</span> <span class="label-text">Mal</span>
+            </label>
+          </div>
+
+          <div class="physical-row">
+            <div class="input-group small">
+              <label>😴 Horas sueño</label>
+              <input type="number" name="sleepHours" ngModel placeholder="0" min="0" max="24">
+            </div>
+            <div class="input-group small">
+              <label>💧 Vasos agua</label>
+              <input type="number" name="waterGlasses" ngModel placeholder="0" min="0">
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card full-width">
+          <h3 class="section-title-card">🙏 Gratitud</h3>
+          <div class="input-group">
+            <label for="gratitude">Hoy agradezco por...</label>
+            <input type="text" id="gratitude" name="gratitude" placeholder="El café de la mañana, una llamada..." ngModel>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="save-btn" [disabled]="!agendaForm.valid">
+          <span class="icon">💾</span> Guardar Registro
+        </button>
+      </div>
+
+    </form>
+
+    <div class="history-section">
+      <h2 class="history-title">📅 Mis Registros Anteriores</h2>
+      
+      <div *ngIf="entries.length === 0" class="empty-state glass-card">
+        <p>Aún no has escrito nada.</p>
+        <span>¡Comienza tu primera nota hoy! ✍️</span>
+      </div>
+
+      <div class="history-list" *ngIf="entries.length > 0">
+        <div *ngFor="let entry of entries" class="glass-card history-item animated-fade">
+          <div class="history-header">
+            <span class="date">{{ entry.date | date:'dd/MM/yyyy' }}</span>
+            <span class="mood-badge" [ngClass]="entry.mood">
+              {{ entry.mood === 'happy' ? '😃' : (entry.mood === 'neutral' ? '😐' : '😔') }}
+            </span>
+          </div>
+          <h4>{{ entry.subject }}</h4>
+          <p class="reflection-text" *ngIf="entry.reflection">"{{ entry.reflection }}"</p>
+          
+          <div class="footer-stats">
+            <span *ngIf="entry.gratitude">🙏: {{ entry.gratitude }}</span>
+            <span *ngIf="entry.sleepHours">😴: {{ entry.sleepHours }}h</span>
+            <button class="delete-btn" (click)="deleteEntry(entry.id)">🗑️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="spacer"></div>
+
+  <nav class="bottom-nav">
+    <a routerLink="/inicio" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">🏠</span> <span class="nav-label">Inicio</span>
+    </a>
+    <a routerLink="/meditaciones" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">🧘</span> <span class="nav-label">Meditar</span>
+    </a>
+    <a routerLink="/rutinas" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">🍃</span> <span class="nav-label">Rutinas</span>
+    </a>
+    <a routerLink="/agenda" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">📅</span> <span class="nav-label">Agenda</span>
+    </a>
+    <a routerLink="/perfil" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">👤</span> <span class="nav-label">Perfil</span>
+    </a>
+  </nav>
+
+</div>

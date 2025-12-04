@@ -14,12 +14,17 @@ import { HomeComponent } from './components/home/home/home.component';
 import { ObjetivosComponent } from './components/objetivos/objetivos.component';
 import { MeditacionesComponent } from './components/meditaciones/meditaciones.component';
 import { PerfilComponent } from './components/perfil/perfil.component'; 
+import { AgendaComponent } from './components/agenda/agenda.component';
+import { RutinasComponent } from './components/rutinas/rutinas.component';
+
 const routes: Routes = [
     { path: '', component: LoginComponent },
     {path: 'objetivos', component: ObjetivosComponent},
     {path: 'meditaciones', component: MeditacionesComponent},
     {path: 'home', component: HomeComponent},
     {path: 'perfil', component: PerfilComponent},
+    {path: 'agenda', component: AgendaComponent},
+    {path: 'rutinas', component: RutinasComponent},
   {path: 'main', component: MainComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},

@@ -1,148 +1,85 @@
+$green-dark: #1a3c2f;
+$green-primary: #2d936c;
+
 :host {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background: linear-gradient(135deg, #a8e6cf 0%, #2d936c 100%);
   font-family: 'Poppins', sans-serif;
-  padding-bottom: 80px; /* espacio para la navegación */
 }
 
+/* HEADER */
 .header {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 20px;
-  text-align: center;
-  border-radius: 20px;
-  margin: 20px;
-  color: #fff;
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 25px 20px 10px; color: white;
+  h1 { margin: 0; font-size: 22px; font-weight: 600; }
+  .subtitle { margin: 5px 0 0; opacity: 0.9; font-size: 14px; }
 }
 
-.header h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.content { padding: 20px; flex-grow: 1; }
+
+/* MOOD TRACKER */
+.mood-selector {
+  display: flex; gap: 10px; overflow-x: auto; padding-bottom: 20px;
+  .mood-btn {
+    background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px; padding: 10px 15px; color: $green-dark;
+    display: flex; flex-direction: column; align-items: center; min-width: 70px; cursor: pointer; transition: all 0.3s ease;
+    span { margin-top: 5px; font-size: 12px; font-weight: 600; }
+    &.active { background: #fff; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+  }
 }
 
-.content {
-  flex-grow: 1;
-  padding: 20px;
-}
-
-.section-title {
-  font-size: 20px;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 20px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-
-.meditaciones-lista {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
+/* LISTA */
+.section-title { color: white; margin-bottom: 15px; font-size: 18px; }
 .meditacion-item {
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 16px;
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
-  border: 1px solid rgba(255,255,255,0.18);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex; align-items: center; background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px; padding: 12px; margin-bottom: 12px; border-left: 5px solid transparent; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  .play-btn { width: 40px; height: 40px; border-radius: 50%; background: $green-primary; border: none; color: white; margin-right: 12px; cursor: pointer; }
+  .meditacion-info { flex-grow: 1; }
+  .meditacion-titulo { margin: 0 0 4px; font-weight: 600; color: #333; font-size: 15px; }
+  .tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; color: #333; opacity: 0.8; text-transform: uppercase; font-weight: bold; }
+  .meditacion-duracion { font-size: 12px; color: #666; margin-left: 5px; }
+  .fav-btn { background: none; border: none; font-size: 18px; cursor: pointer; }
 }
 
-.meditacion-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(31, 38, 135, 0.2);
+/* SOS BUTTON & OVERLAY */
+.fab-sos {
+  position: fixed; bottom: 90px; right: 20px; width: 60px; height: 60px;
+  border-radius: 50%; background: #ff5252; color: white; border: none; font-weight: bold; font-size: 16px;
+  box-shadow: 0 4px 15px rgba(255, 82, 82, 0.4); z-index: 100; cursor: pointer; animation: pulse 2s infinite;
 }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-.play-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #2d936c;
-  border: none;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin-right: 16px;
-  flex-shrink: 0;
-  transition: background-color 0.2s ease;
+.sos-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26, 60, 47, 0.95); z-index: 200;
+  display: flex; justify-content: center; align-items: center; color: white;
+  .breathing-container { text-align: center; h2 { margin-bottom: 40px; font-weight: 300; } .instruction { margin-top: 40px; font-size: 18px; opacity: 0.8; } .close-sos { margin-top: 50px; padding: 10px 30px; border-radius: 25px; border: 1px solid white; background: transparent; color: white; cursor: pointer; } }
+  .circle-animation {
+    width: 100px; height: 100px; background: rgba(255,255,255,0.2); border-radius: 50%; margin: 0 auto; position: relative;
+    &::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; border-radius: 50%; animation: breathe 8s infinite ease-in-out; }
+  }
 }
+@keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(2.5); opacity: 0.1; } }
 
-.play-btn:hover {
-  background-color: #23784f;
-}
-
-.play-icon {
-  font-size: 20px;
-  margin-left: 3px;
-}
-
-.meditacion-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.meditacion-titulo {
-  font-size: 16px;
-  font-weight: 500;
-  color: #1a3c2f;
-  margin: 0 0 4px 0;
-}
-
-.meditacion-duracion {
-  font-size: 14px;
-  color: #1a3c2f;
-  margin: 0;
-}
+/* NAVEGACIÓN TRANSPARENTE */
+.spacer { height: 90px; } 
 
 .bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(255,255,255,0.25);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  display: flex;
-  justify-content: space-around;
-  padding: 8px 0;
-  border-top: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 -8px 32px rgba(31, 38, 135, 0.1);
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: #1a3c2f;
-  font-size: 12px;
-  transition: color 0.2s ease;
-}
-
-.nav-item.active {
-  color: #2d936c;
-}
-
-.nav-icon img {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-  display: block;
-}
-
-.nav-label {
-  font-weight: 500;
+  position: fixed; bottom: 0; left: 0; width: 100%; height: 75px;
+  background: rgba(255, 255, 255, 0.25); /* Transparencia */
+  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); /* Efecto vidrio */
+  display: flex; justify-content: space-around; align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.18); 
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15); 
+  z-index: 1000;
+  
+  .nav-item {
+    text-decoration: none; display: flex; flex-direction: column; align-items: center; color: $green-dark;
+    font-size: 12px; font-weight: 500; transition: all 0.3s ease;
+    
+    &:hover { transform: translateY(-3px); }
+    &.active { color: $green-primary; transform: scale(1.05); font-weight: 700; }
+    .nav-icon { font-size: 24px; margin-bottom: 2px; }
+  }
 }

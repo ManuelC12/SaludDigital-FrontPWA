@@ -12,36 +12,48 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private usersService: UsersService, private router: Router) {}
+constructor(private usersService: UsersService, private router: Router) {}
 
-  login() {
-    this.errorMessage = '';
-    
-    // Objeto que espera tu endpoint de Login
-    const loginData = { 
-      email: this.email, 
-      password: this.password 
-    };
+// login.component.ts
 
-    this.usersService.login(loginData).subscribe({
-      next: (res: any) => {
-        // Asumiendo que tu backend devuelve un status o token si es exitoso
-        // Ajusta esta condición según tu respuesta real de C#
-        if (res) {
-          // 1. Guardar email para el perfil
-          localStorage.setItem('userEmail', this.email);
-          
-          // 2. Guardar token si existe
-          if(res.token) localStorage.setItem('token', res.token);
-
-          // 3. Redirigir
-          this.router.navigate(['/meditaciones']);
-        }
-      },
-      error: (err) => {
-        console.error(err);
-        this.errorMessage = 'Error al iniciar sesión. Verifica tus credenciales.';
-      }
-    });
+login() {
+  // ... validaciones previas ...
+  if (!this.email || !this.password) {
+    this.errorMessage = 'Por favor ingresa email y contraseña.';
+    return;
   }
+
+  const loginData = {
+    email: this.email,
+    password: this.password
+  };
+
+  this.usersService.login(loginData).subscribe({
+    next: (res: any) => {
+      console.log('Respuesta del servidor:', res); 
+
+      // 🛑 CAMBIO CRÍTICO AQUÍ:
+      // No basta con preguntar "if (res)". 
+      // Hay que preguntar si el status que mandó C# es "ok".
+      // Nota: Verifica en tu consola si viene como "status" (minúscula) o "Status" (mayúscula)
+      
+      if (res && res.status === 'ok') { 
+        
+        localStorage.setItem('userEmail', this.email);
+        
+        // En tu C#, el token lo guardas en 'Content'
+        if(res.content) localStorage.setItem('token', res.content);
+
+        this.router.navigate(['/meditaciones']);
+      } else {
+        // Si el servidor respondió, pero dijo "error" en el status
+        this.errorMessage = res.info || 'Credenciales incorrectas';
+      }
+    },
+    error: (err) => {
+      console.error(err);
+      this.errorMessage = 'Error de conexión con el servidor.';
+    }
+  });
+}
 }

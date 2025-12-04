@@ -1,52 +1,86 @@
 <div class="main-container">
+  
   <header class="header">
-    <h1>Comienza tu meditación</h1>
+    <h1>Hola, ¿Cómo te sientes?</h1>
+    <p class="subtitle">Elige una emoción para recomendarte algo:</p>
   </header>
 
   <main class="content">
-    <h2 class="section-title">Meditaciones recomendadas para ti</h2>
+    
+    <div class="mood-selector">
+      <button (click)="filtrarPor('ansiedad')" [class.active]="filtroActual === 'ansiedad'" class="mood-btn ansiedad">
+        😰 <span>Ansiedad</span>
+      </button>
+      <button (click)="filtrarPor('dormir')" [class.active]="filtroActual === 'dormir'" class="mood-btn dormir">
+        😴 <span>Sueño</span>
+      </button>
+      <button (click)="filtrarPor('energia')" [class.active]="filtroActual === 'energia'" class="mood-btn energia">
+        ⚡ <span>Energía</span>
+      </button>
+      <button (click)="filtrarPor('todos')" [class.active]="filtroActual === 'todos'" class="mood-btn todos">
+        🧘 <span>Ver todo</span>
+      </button>
+    </div>
+
+    <h2 class="section-title">
+      {{ filtroActual === 'todos' ? 'Todas las meditaciones' : 'Recomendado para ti' }}
+    </h2>
     
     <div class="meditaciones-lista">
-      <div *ngFor="let meditacion of meditacionesRecomendadas" class="meditacion-item">
-        <button class="play-btn" (click)="reproducirMeditacion(meditacion.id)">
-          <span class="play-icon">▶</span>
-        </button>
+      <div *ngFor="let meditacion of meditacionesVisibles" class="meditacion-item" [style.border-left-color]="meditacion.color">
+        
+     <button class="play-btn" (click)="reproducirMeditacion(meditacion)">
+  <span class="play-icon">
+    {{ meditacion.reproduciendo ? '⏸' : '▶' }}
+  </span>
+</button>
+        
         <div class="meditacion-info">
           <p class="meditacion-titulo">{{ meditacion.titulo }}</p>
-          <p class="meditacion-duracion">{{ meditacion.duracion }} mins</p>
+          <div class="meta-info">
+            <span class="tag" [style.background-color]="meditacion.color">{{ meditacion.categoria }}</span>
+            <span class="meditacion-duracion"> • {{ meditacion.duracion }} mins</span>
+          </div>
         </div>
+
+        <button class="fav-btn" (click)="toggleFavorito(meditacion)">
+          {{ meditacion.esFavorito ? '❤️' : '🤍' }}
+        </button>
+
+      </div>
+
+      <div *ngIf="meditacionesVisibles.length === 0" class="empty-state">
+        <p>No hay meditaciones para esta categoría aún.</p>
       </div>
     </div>
   </main>
-<nav class="bottom-nav">
-  <a href="#" class="nav-item active">
-    <span class="nav-icon">
-      <img src="assets/icons/inicio.png" alt="Inicio">
-    </span>
-    <span class="nav-label">Inicio</span>
-  </a>
 
-  <a href="#" class="nav-item">
-    <span class="nav-icon">
-      <img src="assets/icons/meditacion.png" alt="Meditación">
-    </span>
-    <span class="nav-label">Meditación</span>
-  </a>
+  <button class="fab-sos" (click)="toggleSOS()">SOS</button>
 
-  <a href="#" class="nav-item">
-    <span class="nav-icon">
-      <img src="assets/icons/agenda.png" alt="Agendas">
-    </span>
-    <span class="nav-label">Agendas</span>
-  </a>
-<a routerLink="/perfil" class="nav-item">
-  <span class="nav-icon">
-    <img src="assets/icons/cuenta.png" alt="Perfil">
-  </span>
-  <span class="nav-label">Perfil</span>
-</a>
+  <div class="sos-overlay" *ngIf="modoSOS">
+    <div class="breathing-container">
+      <h2>Respira conmigo</h2>
+      <div class="circle-animation"></div>
+      <p class="instruction">Inhala... Exhala...</p>
+      <button class="close-sos" (click)="toggleSOS()">Me siento mejor</button>
+    </div>
+  </div>
 
+  <div class="spacer"></div>
 
-</nav>
+  <nav class="bottom-nav">
+    <a routerLink="/meditaciones" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">🧘</span> <span class="nav-label">Meditar</span>
+    </a>
+    <a routerLink="/rutinas" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">🍃</span> <span class="nav-label">Rutinas</span>
+    </a>
+      <a routerLink="/agenda" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">📅</span> <span class="nav-label">Agenda</span>
+    </a>
+    <a routerLink="/perfil" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">👤</span> <span class="nav-label">Perfil</span>
+    </a>
+  </nav>
 
 </div>

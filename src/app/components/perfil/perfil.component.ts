@@ -10,10 +10,10 @@ import { UsersService } from '../services/users.services';
 export class PerfilComponent implements OnInit {
 
   usuario: any = {
-    nombre: '',
+    nombre: 'Usuario',
     email: '',
     edad: 0,
-    genre: ''
+    genre: 'No especificado'
   };
   
   loading: boolean = true;
@@ -29,33 +29,29 @@ export class PerfilComponent implements OnInit {
     if (emailLocal) {
       this.usersService.getUserByEmail(emailLocal).subscribe({
         next: (response: any) => {
-          console.log('✅ Perfil cargado correctamente');
-
-          // 1. EXTRAER DATOS: Tu backend los envía dentro de 'content'
-          // Si por alguna razón 'content' no existe, usamos 'response' directo como respaldo.
+          // Ajusta esto según tu backend (si viene en 'content' o directo)
           const data = response.content || response;
 
-          // 2. MAPEO EXACTO (Basado en tu consola: name, email, age, gender)
           this.usuario = {
             nombre: data.name || 'Sin Nombre',
             email:  data.email || emailLocal,
             edad:   data.age || 0,
             genre:  data.gender || 'No especificado'
           };
-
           this.loading = false;
         },
         error: (err) => {
-          console.error('❌ Error al cargar perfil:', err);
+          console.error('Error cargando perfil:', err);
           this.loading = false;
         }
       });
     } else {
+      // Si no hay email, al login
       this.router.navigate(['/login']);
     }
   }
 
-  // Generar iniciales (Ej: Mesi -> M)
+  // Generar iniciales (Ej: Juan Perez -> JP)
   get iniciales(): string {
     const nombre = this.usuario.nombre || '';
     if (!nombre || nombre === 'Sin Nombre') return '?';
@@ -67,13 +63,9 @@ export class PerfilComponent implements OnInit {
     return nombre[0].toUpperCase();
   }
 
-  irAlInicio() {
-    this.router.navigate(['/home']); 
-  }
-
   cerrarSesion() {
-    localStorage.removeItem('userEmail');
-    // Si usas token, bórralo también: localStorage.removeItem('token');
+    // Limpiamos todo el localStorage para seguridad
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
-}
+}8
