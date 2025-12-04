@@ -6,16 +6,26 @@ $white-glass-border: rgba(255, 255, 255, 0.18);
 $shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.1);
 
 :host {
-  display: flex; flex-direction: column; min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background: linear-gradient(135deg, $green-light 0%, $green-primary 100%);
-  font-family: 'Poppins', sans-serif; color: $green-dark;
+  font-family: 'Poppins', sans-serif;
+  color: $green-dark;
 }
 
 // HEADER
 .header {
-  background: $white-glass; backdrop-filter: blur(10px); padding: 20px;
-  text-align: center; border-radius: 20px; margin: 20px; color: #fff;
-  box-shadow: $shadow-glass; border: 1px solid $white-glass-border;
+  background: $white-glass;
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  text-align: center;
+  border-radius: 20px;
+  margin: 20px;
+  color: #fff;
+  box-shadow: $shadow-glass;
+  border: 1px solid $white-glass-border;
+
   h1 { margin: 0; font-size: 24px; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
   .subtitle { font-size: 14px; opacity: 0.9; }
 }
@@ -31,27 +41,26 @@ $shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.1);
 
 // TARJETA GLASS
 .glass-card {
-  background: $white-glass; backdrop-filter: blur(10px); border-radius: 20px;
-  padding: 20px; box-shadow: $shadow-glass; border: 1px solid $white-glass-border;
+  background: $white-glass;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: $shadow-glass;
+  border: 1px solid $white-glass-border;
   transition: transform 0.2s ease;
   &:hover { transform: translateY(-2px); }
 }
 .section-title-card { margin: 0 0 15px 0; font-size: 18px; color: $green-dark; font-weight: 600; }
 
-// INPUTS & VALIDACIÓN
+// INPUTS
 .input-group {
   display: flex; flex-direction: column; margin-bottom: 15px;
   label { font-size: 14px; font-weight: 500; margin-bottom: 5px; color: $green-dark; }
-  
   input, textarea {
     padding: 12px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.4);
     background: rgba(255, 255, 255, 0.6); font-family: 'Poppins', sans-serif;
     color: $green-dark; outline: none; transition: all 0.3s ease; width: 100%; box-sizing: border-box;
-    
     &:focus { background: #fff; box-shadow: 0 0 0 2px $green-primary; }
-    
-    // Validación visual: Rojo si es inválido y ya fue tocado
-    &.ng-invalid.ng-touched { border-color: #ff5252; box-shadow: 0 0 0 1px #ff5252; }
   }
   textarea { resize: vertical; min-height: 80px; }
 }
@@ -84,27 +93,16 @@ $shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.1);
   background: $green-dark; color: white; border: none; padding: 15px 40px; border-radius: 30px;
   font-weight: 600; font-size: 16px; cursor: pointer; box-shadow: 0 8px 20px rgba(26, 60, 47, 0.3);
   transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px;
-  
   &:hover:not(:disabled) { background: darken($green-dark, 5%); transform: translateY(-2px); }
-  &:disabled { background: rgba($green-dark, 0.5); cursor: not-allowed; box-shadow: none; opacity: 0.7; }
+  &:disabled { background: rgba($green-dark, 0.5); cursor: not-allowed; box-shadow: none; }
 }
 
 // HISTORIAL
 .history-section { margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 20px; }
 .history-title { color: #fff; font-size: 20px; margin-bottom: 20px; text-align: center; }
-
-// ESTADO VACÍO
-.empty-state {
-  text-align: center; opacity: 0.8;
-  p { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
-  span { font-size: 14px; }
-}
-
 .history-list { display: flex; flex-direction: column; gap: 15px; }
 .history-item {
   padding: 15px;
-  &.animated-fade { animation: fadeIn 0.5s ease; }
-  
   .history-header {
     display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
     .date { font-size: 12px; opacity: 0.7; font-weight: 600; }
@@ -122,10 +120,9 @@ $shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.1);
   }
 }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+// --- NAVEGACIÓN INFERIOR (GLASS) ---
+.spacer { height: 90px; } // Importante para dar espacio al Nav
 
-// NAV
-.spacer { height: 90px; } 
 .bottom-nav {
   position: fixed; bottom: 0; left: 0; width: 100%; height: 75px;
   background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
@@ -140,4 +137,4 @@ $shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.1);
     &.active { color: $green-primary; transform: scale(1.05); font-weight: 700;}
     .nav-icon { font-size: 24px; margin-bottom: 2px; }
   }
-}
+}   
