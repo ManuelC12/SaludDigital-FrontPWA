@@ -1,92 +1,125 @@
-  <div class="main-container">
-    
-    <header class="header">
-      <h1>Rutinas Guiadas</h1>
-      <p class="subtitle">Pequeños pasos para recuperar tu equilibrio.</p>
-    </header>
+<div class="main-container">
+  
+  <header class="header">
+    <h1>Rutinas Guiadas</h1>
+    <p class="subtitle" *ngIf="!emocionSeleccionada">Elige cómo te sientes para empezar:</p>
+    <p class="subtitle" *ngIf="emocionSeleccionada">
+      Recetas para: <strong>{{ obtenerNombreEmocion(emocionSeleccionada) }}</strong>
+    </p>
+  </header>
 
-    <main class="content">
+  <main class="content">
 
-      <div class="routines-grid">
-        <div *ngFor="let rutina of rutinas" 
-            class="glass-card routine-card" 
-            (click)="iniciarRutina(rutina)">
-          
-          <div class="icon-badge">{{ rutina.icono }}</div>
-          
-          <div class="card-content">
-            <h3>{{ rutina.titulo }}</h3>
-            <p class="desc">{{ rutina.descripcion }}</p>
-            
-            <div class="meta">
-              <span class="tag">⏱ {{ rutina.duracionTotal }} min</span>
-              <span class="tag">{{ rutina.pasos.length }} Pasos</span>
-            </div>
-          </div>
-
-          <button class="play-btn">▶</button>
-        </div>
+    <div class="mood-grid" *ngIf="!emocionSeleccionada">
+      <div class="glass-card mood-card" (click)="seleccionarEmocion('estres')">
+        <span class="emoji">😫</span>
+        <span>Estrés</span>
       </div>
+      <div class="glass-card mood-card" (click)="seleccionarEmocion('ansiedad')">
+        <span class="emoji">😰</span>
+        <span>Ansiedad</span>
+      </div>
+      <div class="glass-card mood-card" (click)="seleccionarEmocion('cansancio')">
+        <span class="emoji">😴</span>
+        <span>Cansancio</span>
+      </div>
+      <div class="glass-card mood-card" (click)="seleccionarEmocion('tristeza')">
+        <span class="emoji">😔</span>
+        <span>Tristeza</span>
+      </div>
+    </div>
 
-    </main>
+    <div class="back-container" *ngIf="emocionSeleccionada">
+      <button class="back-link" (click)="emocionSeleccionada = null">
+        ← Elegir otra emoción
+      </button>
+    </div>
 
-    <div class="routine-player" *ngIf="rutinaActiva">
+    <div class="routines-grid" *ngIf="emocionSeleccionada">
       
-      <div class="progress-header">
-        <button class="close-btn" (click)="cerrarRutina()">✕</button>
-        <div class="progress-track">
-          <div class="progress-fill" [style.width.%]="progresoPorcentaje"></div>
-        </div>
-        <span class="step-counter">{{ pasoActual + 1 }}/{{ rutinaActiva.pasos.length }}</span>
-      </div>
-
-      <div class="step-content animated-fade">
-        <div class="step-icon">{{ rutinaActiva.pasos[pasoActual].icono }}</div>
-        <h2>{{ rutinaActiva.pasos[pasoActual].titulo }}</h2>
-        <p class="step-instruction">{{ rutinaActiva.pasos[pasoActual].instruccion }}</p>
+      <div *ngFor="let rutina of rutinasVisibles" 
+           class="glass-card routine-card" 
+           (click)="iniciarRutina(rutina)">
         
-        <div class="timer-hint" *ngIf="rutinaActiva.pasos[pasoActual].duracionSeg">
-          ⏳ Duración sugerida: {{ rutinaActiva.pasos[pasoActual].duracionSeg }} seg
-        </div>
-      </div>
-
-      <div class="player-controls">
-        <button class="control-btn secondary" (click)="pasoAnterior()" [disabled]="pasoActual === 0">
-          ← Atrás
-        </button>
+        <div class="icon-badge">{{ rutina.icono }}</div>
         
-        <button class="control-btn primary" (click)="siguientePaso()">
-          {{ pasoActual === rutinaActiva.pasos.length - 1 ? 'Finalizar ✨' : 'Siguiente ➜' }}
-        </button>
+        <div class="card-content">
+          <h3>{{ rutina.titulo }}</h3>
+          <p class="desc">{{ rutina.descripcion }}</p>
+          <div class="meta">
+            <span class="tag">⏱ {{ rutina.duracionTotal }} min</span>
+            <span class="tag">{{ rutina.pasos.length }} Pasos</span>
+          </div>
+        </div>
+
+        <button class="play-btn">▶</button>
       </div>
 
-    </div>
-
-    <div class="celebration-overlay" *ngIf="rutinaCompletada">
-      <div class="glass-card celebration-card">
-        <span class="confetti">✨🧘✨</span>
-        <h2>¡Rutina Completada!</h2>
-        <p>Te has regalado un momento importante para ti.</p>
-        <button class="primary-btn" (click)="finalizarTodo()">Volver al menú</button>
+      <div *ngIf="rutinasVisibles.length === 0" class="empty-state">
+        <p>No hay rutinas específicas para esto aún.</p>
       </div>
     </div>
 
-    <div class="spacer"></div>
+  </main>
 
-    <nav class="bottom-nav">
+  <div class="routine-player" *ngIf="rutinaActiva">
     
-      <a routerLink="/meditaciones" routerLinkActive="active" class="nav-item">
-        <span class="nav-icon">🧘</span> <span class="nav-label">Meditar</span>
-      </a>
-      <a routerLink="/rutinas" routerLinkActive="active" class="nav-item">
-        <span class="nav-icon">🍃</span> <span class="nav-label">Rutinas</span>
-      </a>
-        <a routerLink="/agenda" routerLinkActive="active" class="nav-item">
-        <span class="nav-icon">📅</span> <span class="nav-label">Agenda</span>
-      </a>
-      <a routerLink="/perfil" routerLinkActive="active" class="nav-item">
-        <span class="nav-icon">👤</span> <span class="nav-label">Perfil</span>
-      </a>
-    </nav>
+    <div class="progress-header">
+      <button class="close-btn" (click)="cerrarRutina()">✕</button>
+      <div class="progress-track">
+        <div class="progress-fill" [style.width.%]="progresoPorcentaje"></div>
+      </div>
+      <span class="step-counter">{{ pasoActual + 1 }}/{{ rutinaActiva.pasos.length }}</span>
+    </div>
+
+    <div class="step-content animated-fade">
+      <div class="step-icon">{{ rutinaActiva.pasos[pasoActual].icono }}</div>
+      <h2>{{ rutinaActiva.pasos[pasoActual].titulo }}</h2>
+      <p class="step-instruction">{{ rutinaActiva.pasos[pasoActual].instruccion }}</p>
+      
+      <div class="timer-hint" *ngIf="rutinaActiva.pasos[pasoActual].duracionSeg">
+        ⏳ Duración sugerida: {{ rutinaActiva.pasos[pasoActual].duracionSeg }} seg
+      </div>
+    </div>
+
+    <div class="player-controls">
+      <button class="control-btn secondary" (click)="pasoAnterior()" [disabled]="pasoActual === 0">
+        ← Atrás
+      </button>
+      <button class="control-btn primary" (click)="siguientePaso()">
+        {{ pasoActual === rutinaActiva.pasos.length - 1 ? 'Finalizar ✨' : 'Siguiente ➜' }}
+      </button>
+    </div>
 
   </div>
+
+  <div class="celebration-overlay" *ngIf="rutinaCompletada">
+    <div class="glass-card celebration-card">
+      <span class="confetti">✨🌿✨</span>
+      <h2>¡Lo lograste!</h2>
+      <p>Has dedicado tiempo valioso para ti.</p>
+      <button class="primary-btn" (click)="finalizarTodo()">Volver al menú</button>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <nav class="bottom-nav">
+    <a routerLink="/inicio" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">🏠</span> <span class="nav-label">Inicio</span>
+    </a>
+    <a routerLink="/meditaciones" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">🧘</span> <span class="nav-label">Meditar</span>
+    </a>
+    <a routerLink="/rutinas" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">🍃</span> <span class="nav-label">Rutinas</span>
+    </a>
+    <a routerLink="/agenda" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">📅</span> <span class="nav-label">Agenda</span>
+    </a>
+    <a routerLink="/perfil" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">👤</span> <span class="nav-label">Perfil</span>
+    </a>
+  </nav>
+
+</div>

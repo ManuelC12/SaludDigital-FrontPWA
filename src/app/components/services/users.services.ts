@@ -6,23 +6,25 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
-  // Ajusta el puerto si es necesario (ej: 44344 o 7152)
-  private apiUrl = "https://localhost:44344/api/Users";
+
+  // URL REAL DE RENDER
+  private apiUrl = "https://saluddigital-back-1.onrender.com/api/Users";
 
   constructor(private http: HttpClient) {}
 
-  // Registrar usuario
-  register(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, data);
-  }
-
-  // Iniciar sesión
+  // 1. Iniciar sesión
   login(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, data);
   }
 
-  // Obtener datos del perfil (Enviamos email en el body del POST)
+  // 2. Registrar usuario
+  register(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, data);
+  }
+
+  // 3. Obtener perfil
   getUserByEmail(email: string): Observable<any> {
+    // Tu backend espera un objeto JSON con el email, no el string directo
     const body = { email: email };
     return this.http.post(`${this.apiUrl}/getUser`, body);
   }

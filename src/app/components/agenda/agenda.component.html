@@ -20,7 +20,7 @@
 
           <div class="input-group">
             <label for="subject">Título del día</label>
-            <input type="text" id="subject" name="subject" placeholder="Ej: Un día tranquilo..." ngModel required minlength="3">
+            <input type="text" id="subject" name="subject" placeholder="Ej: Un día difícil..." ngModel required minlength="3">
           </div>
 
           <div class="input-group">
@@ -30,33 +30,43 @@
         </div>
 
         <div class="glass-card mood-section">
-          <h3 class="section-title-card">✨ Bienestar</h3>
+          <h3 class="section-title-card">✨ ¿Cómo te sientes?</h3>
           
-          <label class="sub-label">¿Cómo te sentiste?</label>
-          <div class="mood-options">
-            <input type="radio" id="mood-happy" name="mood" value="happy" ngModel required>
-            <label for="mood-happy" class="mood-item">
-              <span class="emoji">😃</span> <span class="label-text">Bien</span>
-            </label>
+          <div class="mood-options grid-2-col">
+            
+            <input type="radio" id="m-neutral" name="mood" value="neutral" ngModel required>
+            <label for="m-neutral" class="mood-item"><span class="emoji">😐</span> Neutro</label>
 
-            <input type="radio" id="mood-neutral" name="mood" value="neutral" ngModel required>
-            <label for="mood-neutral" class="mood-item">
-              <span class="emoji">😐</span> <span class="label-text">Normal</span>
-            </label>
+            <input type="radio" id="m-tired" name="mood" value="tired" ngModel required>
+            <label for="m-tired" class="mood-item"><span class="emoji">😫</span> Agotado</label>
 
-            <input type="radio" id="mood-sad" name="mood" value="sad" ngModel required>
-            <label for="mood-sad" class="mood-item">
-              <span class="emoji">😔</span> <span class="label-text">Mal</span>
-            </label>
+            <input type="radio" id="m-sad" name="mood" value="sad" ngModel required>
+            <label for="m-sad" class="mood-item"><span class="emoji">😔</span> Triste</label>
+
+            <input type="radio" id="m-anxious" name="mood" value="anxious" ngModel required>
+            <label for="m-anxious" class="mood-item"><span class="emoji">😰</span> Ansioso</label>
+
+            <input type="radio" id="m-lonely" name="mood" value="lonely" ngModel required>
+            <label for="m-lonely" class="mood-item"><span class="emoji">🥺</span> Solo/a</label>
+
+            <input type="radio" id="m-angry" name="mood" value="angry" ngModel required>
+            <label for="m-angry" class="mood-item"><span class="emoji">😠</span> Irritado</label>
+
+            <input type="radio" id="m-apathetic" name="mood" value="apathetic" ngModel required>
+            <label for="m-apathetic" class="mood-item"><span class="emoji">😞</span> Desmotivado</label>
+
+            <input type="radio" id="m-overwhelmed" name="mood" value="overwhelmed" ngModel required>
+            <label for="m-overwhelmed" class="mood-item"><span class="emoji">😵</span> Abrumado</label>
+
           </div>
 
           <div class="physical-row">
             <div class="input-group small">
-              <label>😴 Horas sueño</label>
+              <label>😴 Sueño (h)</label>
               <input type="number" name="sleepHours" ngModel placeholder="0" min="0" max="24">
             </div>
             <div class="input-group small">
-              <label>💧 Vasos agua</label>
+              <label>💧 Agua (vasos)</label>
               <input type="number" name="waterGlasses" ngModel placeholder="0" min="0">
             </div>
           </div>
@@ -66,7 +76,7 @@
           <h3 class="section-title-card">🙏 Gratitud</h3>
           <div class="input-group">
             <label for="gratitude">Hoy agradezco por...</label>
-            <input type="text" id="gratitude" name="gratitude" placeholder="El café de la mañana, una llamada..." ngModel>
+            <input type="text" id="gratitude" name="gratitude" placeholder="Algo pequeño..." ngModel>
           </div>
         </div>
 
@@ -81,20 +91,18 @@
     </form>
 
     <div class="history-section">
-      <h2 class="history-title">📅 Mis Registros Anteriores</h2>
+      <h2 class="history-title">📅 Historial</h2>
       
       <div *ngIf="entries.length === 0" class="empty-state glass-card">
         <p>Aún no has escrito nada.</p>
-        <span>¡Comienza tu primera nota hoy! ✍️</span>
+        <span>Tu historia comienza hoy. ✍️</span>
       </div>
 
       <div class="history-list" *ngIf="entries.length > 0">
         <div *ngFor="let entry of entries" class="glass-card history-item animated-fade">
           <div class="history-header">
             <span class="date">{{ entry.date | date:'dd/MM/yyyy' }}</span>
-            <span class="mood-badge" [ngClass]="entry.mood">
-              {{ entry.mood === 'happy' ? '😃' : (entry.mood === 'neutral' ? '😐' : '😔') }}
-            </span>
+            <span class="mood-badge">{{ getMoodEmoji(entry.mood) }}</span>
           </div>
           <h4>{{ entry.subject }}</h4>
           <p class="reflection-text" *ngIf="entry.reflection">"{{ entry.reflection }}"</p>
@@ -113,9 +121,7 @@
   <div class="spacer"></div>
 
   <nav class="bottom-nav">
-    <a routerLink="/inicio" routerLinkActive="active" class="nav-item">
-      <span class="nav-icon">🏠</span> <span class="nav-label">Inicio</span>
-    </a>
+
     <a routerLink="/meditaciones" routerLinkActive="active" class="nav-item">
       <span class="nav-icon">🧘</span> <span class="nav-label">Meditar</span>
     </a>
